@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "lpgstb-tfo-netstate-s-uswe1-01"
+    bucket = "demo-bucket"
     prefix = "terraform/state"
   }
 }
