@@ -54,7 +54,7 @@ module "test-uswe1-01" {
 
 module "test-mod-vm" {
 
-  source              = "git::https://source.developers.google.com/p/lpgprj-gss-n-iacbst-gl-01/r/lpgrep-gss-iac-mod-npr-01//modules/compute-instance?ref=tags/v1.1.1"
+  source              = "git::https://source.developers.google.com/p/demo-proj/r/demo-bucket//modules/network?ref=tags/v1.2.3"
   project_id          = "demo-vm-proj"
   instance_name       = "demo-vm"
   machine_type        = "e2-standard-16"
