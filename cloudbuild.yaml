@@ -1,0 +1,57 @@
+steps:
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |
+      cd main/
+      gcloud secrets versions access latest --secret=lpgsma-fobu-net-iac-key --project=lpgprj-gss-n-iacnet-gl-01 --format='get(payload.data)' | tr '_-' '/+' | base64 -d > credentials.json
+      
+- name: 'gcr.io/lpgprj-gss-n-iacbst-gl-01/terraform:0.14.3'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - | 
+      cd main/
+     
+      echo "*********************************************"
+      echo "Downloading Modules"
+      echo "*********************************************"      
+      terraform get
+
+- name: 'gcr.io/lpgprj-gss-n-iacbst-gl-01/terraform:0.14.3'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - | 
+      cd main/
+     
+      echo "*********************************************"
+      echo "Initiating Plan"
+      echo "*********************************************"      
+      terraform init
+
+- name: 'gcr.io/lpgprj-gss-n-iacbst-gl-01/terraform:0.14.3'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      cd main/
+      echo "*********************************************"
+      echo "Executing Plan"
+      echo "*********************************************"
+      terraform plan
+
+- name: 'gcr.io/lpgprj-gss-n-iacbst-gl-01/terraform:0.14.3'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      cd main/
+      echo "*********************************************"
+      echo "Applyting Plan"
+      echo "*********************************************"
+      terraform apply --auto-approve
+
+timeout: 6000s
