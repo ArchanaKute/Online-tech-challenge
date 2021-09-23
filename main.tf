@@ -1,3 +1,3 @@
-module "lpgmod-network" {
+module "testgmod-network" {
   source = "../config/network"
 }
