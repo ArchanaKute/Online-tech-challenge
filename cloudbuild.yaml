@@ -6,9 +6,9 @@ steps:
     - '-c'
     - |
       cd main/
-      gcloud secrets versions access latest --secret=test-service-account-key --project=vpc-subnet-proj --format='get(payload.data)' | tr '_-' '/+' | base64 -d > credentials.json
+      gcloud secrets versions access latest --secret=test-service-account-key --project=demo-vpc-proj --format='get(payload.data)' | tr '_-' '/+' | base64 -d > credentials.json
       
-- name: 'gcr.io/demo-proj1/terraform:0.14.3'
+- name: 'gcr.io/demo-vpc-proj/terraform:0.14.3'
   entrypoint: 'bash'
   args:
     - '-c'
@@ -20,7 +20,7 @@ steps:
       echo "*********************************************"      
       terraform get
 
-- name: 'gcr.io/demo-proj1/terraform:0.14.3'
+- name: 'gcr.io/demo-vpc-proj/terraform:0.14.3'
   entrypoint: 'bash'
   args:
     - '-c'
@@ -32,7 +32,7 @@ steps:
       echo "*********************************************"      
       terraform init
 
-- name: 'gcr.io/demo-proj1/terraform:0.14.3'
+- name: 'gcr.io/demo-vpc-proj/terraform:0.14.3'
   entrypoint: 'bash'
   args:
     - '-c'
@@ -43,7 +43,7 @@ steps:
       echo "*********************************************"
       terraform plan
 
-- name: 'gcr.io/demo-proj1/terraform:0.14.3'
+- name: 'gcr.io/demo-vpc-proj/terraform:0.14.3'
   entrypoint: 'bash'
   args:
     - '-c'
